@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Shine Guys — Mobile Detailing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #2ab5f5;
+      --blue2:   #1a8ed4;
+      --blue3:   #0d5f94;
+      --silver:  #b8ccd8;
+      --chrome:  #ddeaf3;
+      --dark:    #07090d;
+      --dark2:   #0b0f18;
+      --dark3:   #111827;
+      --dark4:   #1a2333;
+      --text:    #7a92a8;
+      --white:   #eef4f8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(rgba(7,9,13,0.55), rgba(7,9,13,0.55)), url('1000019979.jpg') center / cover fixed;
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 68px;
+      background: rgba(7,9,13,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(42,181,245,0.1);
+      transition: background 0.3s;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .nav-logo img { height: 40px; border-radius: 50%; }
+    .nav-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem; font-weight: 800;
+      letter-spacing: 0.06em; color: var(--white);
+      text-transform: uppercase;
+    }
+    .nav-logo span em { color: var(--blue); font-style: normal; }
+
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--silver); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta {
+      background: var(--blue); color: #000 !important;
+      padding: 0.5rem 1.25rem; border-radius: 6px;
+      font-weight: 700 !important; letter-spacing: 0.06em !important;
+      transition: background 0.2s, transform 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--chrome) !important; transform: translateY(-1px); }
+
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid rgba(42,181,245,0.3);
+      color: var(--blue);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+      padding: 0.35rem 0.75rem; border-radius: 6px;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+      font-family: 'Inter', sans-serif; line-height: 1;
+    }
+    .lang-toggle:hover { background: rgba(42,181,245,0.1); }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% -10%, rgba(42,181,245,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 30% at 85% 80%, rgba(26,142,212,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 25% at 15% 55%, rgba(42,181,245,0.08) 0%, transparent 55%);
+    }
+
+    /* Animated grid lines */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(42,181,245,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,181,245,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(42,181,245,0.3);
+      background: rgba(42,181,245,0.06);
+      padding: 0.35rem 1rem; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 1.75rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 900; line-height: 0.95;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-h1 .line1 { display: block; color: var(--white); }
+    .hero-h1 .line2 {
+      display: block;
+      background: linear-gradient(100deg, var(--blue) 0%, #7de8ff 50%, var(--chrome) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 30px rgba(42,181,245,0.4));
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; color: #cde4f0; max-width: 520px;
+      margin: 0 auto 2.5rem; line-height: 1.7;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+    }
+
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--blue); color: #000;
+      font-weight: 700; font-size: 0.88rem; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 0.85rem 2rem; border-radius: 8px;
+      box-shadow: 0 4px 24px rgba(42,181,245,0.35), 0 1px 4px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--chrome); transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(42,181,245,0.45), 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(42,181,245,0.3); color: var(--blue);
+      font-weight: 700; font-size: 0.88rem; letter-spacing: 0.06em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 0.85rem 2rem; border-radius: 8px;
+      background: transparent;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--blue); background: rgba(42,181,245,0.08);
+      transform: translateY(-2px);
+    }
+    .btn-ghost:active { transform: translateY(0); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.5rem; font-weight: 900;
+      color: var(--blue); line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .stat-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text); margin-top: 0.25rem;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section { position: relative; z-index: 1; }
+
+    .section-pad { padding: 6rem 2rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; text-transform: uppercase;
+      letter-spacing: -0.01em; line-height: 1.05;
+      color: var(--white); margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1rem; color: var(--text); max-width: 520px;
+      line-height: 1.7; margin-bottom: 3rem;
+    }
+
+    /* ─── SERVICES ─── */
+    #services { background: rgba(11,15,24,0.82); }
+
+    .services-header { text-align: center; }
+    .services-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5px;
+      background: rgba(42,181,245,0.08);
+      border: 1px solid rgba(42,181,245,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .service-card {
+      background: var(--dark2);
+      padding: 2.25rem 2rem;
+      transition: background 0.25s;
+      cursor: default;
+    }
+    .service-card:hover { background: var(--dark3); }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(42,181,245,0.1);
+      border: 1px solid rgba(42,181,245,0.2);
+      border-radius: 12px;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.25rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+
+    .service-desc { font-size: 0.88rem; color: var(--text); line-height: 1.65; margin-bottom: 1.25rem; }
+
+    .service-features { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .service-features li {
+      font-size: 0.8rem; color: var(--silver);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .service-features li::before {
+      content: ''; width: 4px; height: 4px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0;
+    }
+
+    .service-price {
+      margin-top: 1.5rem; padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--blue);
+    }
+    .service-price small { font-size: 0.85rem; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; }
+
+    /* ─── HOW IT WORKS ─── */
+    #process { background: rgba(7,9,13,0.82); }
+
+    .process-header { text-align: center; }
+    .process-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute; top: 28px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(42,181,245,0.3), transparent);
+    }
+
+    .step { padding: 0 2rem; text-align: center; }
+
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem; font-weight: 900;
+      background: var(--dark3);
+      border: 2px solid rgba(42,181,245,0.4);
+      color: var(--blue);
+      position: relative; z-index: 1;
+      box-shadow: 0 0 20px rgba(42,181,245,0.15);
+    }
+
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+
+    .step-desc { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
+
+    /* ─── GALLERY / BEFORE AFTER ─── */
+    #gallery { background: rgba(11,15,24,0.82); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 1rem;
+    }
+
+    .gallery-item {
+      border-radius: 10px; overflow: hidden;
+      position: relative;
+      background: var(--dark3);
+    }
+    .gallery-item:first-child {
+      grid-row: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(7,9,13,0.75) 0%, transparent 50%);
+      display: flex; align-items: flex-end;
+      padding: 1.25rem;
+    }
+
+    .gallery-tag {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue);
+      background: rgba(7,9,13,0.7);
+      padding: 0.3rem 0.7rem; border-radius: 4px;
+    }
+
+    /* Placeholder cars */
+    .gallery-placeholder {
+      width: 100%; height: 100%; object-fit: cover;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 4rem; opacity: 0.1;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { background: rgba(7,9,13,0.82); }
+
+    .testimonials-header { text-align: center; }
+    .testimonials-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .review-card {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .review-card:hover {
+      border-color: rgba(42,181,245,0.15);
+      transform: translateY(-3px);
+    }
+
+    .review-stars {
+      display: flex; gap: 0.2rem; margin-bottom: 1rem; font-size: 0.9rem;
+      color: #f5a623;
+    }
+
+    .review-text {
+      font-size: 0.9rem; color: var(--silver); line-height: 1.7;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex; align-items: center; gap: 0.75rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1rem;
+    }
+
+    .reviewer-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue3), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85rem; color: #000;
+      flex-shrink: 0;
+    }
+
+    .reviewer-name { font-size: 0.85rem; font-weight: 700; color: var(--white); }
+    .reviewer-meta { font-size: 0.72rem; color: var(--text); }
+
+    /* ─── PRICING ─── */
+    #pricing { background: rgba(11,15,24,0.82); }
+
+    .pricing-header { text-align: center; }
+    .pricing-header .section-sub { margin-left: auto; margin-right: auto; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(42,181,245,0.4);
+      background: linear-gradient(145deg, rgba(42,181,245,0.06), var(--dark3));
+      box-shadow: 0 0 40px rgba(42,181,245,0.1);
+    }
+
+    .pricing-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--blue); color: #000;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 0.25rem 0.9rem; border-radius: 100px;
+    }
+
+    .pricing-tier {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 3rem; font-weight: 900;
+      color: var(--white); line-height: 1; margin-bottom: 0.25rem;
+    }
+    .pricing-price sup { font-size: 1.5rem; vertical-align: super; line-height: 0; }
+    .pricing-price sub { font-size: 0.9rem; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; }
+
+    .pricing-desc { font-size: 0.83rem; color: var(--text); margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .pricing-list li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      font-size: 0.85rem; color: var(--silver);
+    }
+    .pricing-list li .check {
+      color: var(--blue); font-size: 0.8rem; flex-shrink: 0; margin-top: 0.1rem;
+    }
+
+    .btn-pricing {
+      display: block; width: 100%; text-align: center;
+      padding: 0.8rem; border-radius: 8px; text-decoration: none;
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+    }
+    .btn-pricing-outline {
+      border: 1px solid rgba(42,181,245,0.3);
+      color: var(--blue); background: transparent;
+    }
+    .btn-pricing-outline:hover {
+      background: rgba(42,181,245,0.08); transform: translateY(-1px);
+    }
+    .btn-pricing-solid {
+      background: var(--blue); color: #000;
+      box-shadow: 0 4px 20px rgba(42,181,245,0.3);
+    }
+    .btn-pricing-solid:hover {
+      background: var(--chrome); transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(42,181,245,0.4);
+    }
+
+    /* ─── PROMO SHOWCASE ─── */
+    #promo { background: rgba(7,9,13,0.82); }
+
+    /* ─── CTA BANNER ─── */
+    #cta {
+      background: linear-gradient(135deg, var(--dark3) 0%, var(--dark4) 100%);
+      border-top: 1px solid rgba(42,181,245,0.1);
+      border-bottom: 1px solid rgba(42,181,245,0.1);
+    }
+
+    .cta-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+    }
+
+    .cta-text .section-title { margin-bottom: 0.5rem; }
+    .cta-text .section-sub { margin-bottom: 0; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: rgba(7,9,13,0.82); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 2rem; }
+
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+
+    .contact-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(42,181,245,0.1);
+      border: 1px solid rgba(42,181,245,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .contact-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 0.25rem;
+    }
+    .contact-value { font-size: 0.95rem; color: var(--white); font-weight: 500; }
+    .contact-note { font-size: 0.8rem; color: var(--text); }
+
+    /* Form */
+    .booking-form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--silver);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: rgba(42,181,245,0.5);
+      box-shadow: 0 0 0 3px rgba(42,181,245,0.08);
+    }
+    .form-select { cursor: pointer; }
+    .form-select option { background: var(--dark3); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: rgba(11,15,24,0.88);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .footer-brand {}
+    .footer-logo { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; text-decoration: none; }
+    .footer-logo img { height: 36px; border-radius: 50%; }
+    .footer-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--white);
+    }
+    .footer-logo span em { color: var(--blue); font-style: normal; }
+
+    .footer-tagline { font-size: 0.85rem; color: var(--text); line-height: 1.65; max-width: 240px; }
+
+    .footer-col h4 {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--silver); margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col ul a {
+      font-size: 0.85rem; color: var(--text); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--blue); }
+
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.78rem; color: var(--text);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+
+      .hero-stats { gap: 1.5rem; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 180px 180px;
+      }
+      .gallery-item:first-child { grid-row: span 1; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+
+      .cta-inner { flex-direction: column; text-align: center; }
+
+      .steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .steps::before { display: none; }
+
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo.jpg" alt="The Shine Guys">
+      <span>The <em>Shine</em> Guys</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services" data-i18n="nav-services">Services</a></li>
+      <li><a href="#process" data-i18n="nav-process">Process</a></li>
+      <li><a href="#pricing" data-i18n="nav-pricing">Pricing</a></li>
+      <li><a href="#testimonials" data-i18n="nav-reviews">Reviews</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav-book">Book Now</a></li>
+    </ul>
+    <button id="lang-toggle" class="lang-toggle">ES</button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge" data-i18n="hero-badge">Now Serving Your Area</div>
+      <h1 class="hero-h1">
+        <span class="line1" data-i18n="hero-line1">Your Car Deserves</span>
+        <span class="line2" data-i18n="hero-line2">To Shine.</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero-sub">
+        Premium mobile detailing delivered straight to your driveway.
+        No drop-offs. No waiting. Just a showroom finish — on your schedule.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span data-i18n="hero-btn-book">Book a Detail</span>
+        </a>
+        <a href="#services" class="btn-ghost">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          <span data-i18n="hero-btn-services">View Services</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label" data-i18n="stat-cars">Cars Detailed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5★</div>
+          <div class="stat-label" data-i18n="stat-rating">Average Rating</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3+</div>
+          <div class="stat-label" data-i18n="stat-years">Years in Business</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label" data-i18n="stat-sat">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section-pad">
+    <div class="container">
+      <div class="services-header">
+        <span class="section-label" data-i18n="svc-label">What We Offer</span>
+        <h2 class="section-title" data-i18n="svc-title">Professional Detailing<br>At Your Location</h2>
+        <p class="section-sub" data-i18n="svc-sub">From a quick exterior wash to a full interior restoration — we bring the equipment, you stay home.</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">🚗</div>
+          <div class="service-name" data-i18n="svc1-name">Exterior Detail</div>
+          <p class="service-desc" data-i18n="svc1-desc">A thorough hand wash, clay bar, and protective wax coating that restores that factory-fresh gloss.</p>
+          <ul class="service-features">
+            <li data-i18n="svc1-f1">Hand wash & dry</li>
+            <li data-i18n="svc1-f2">Clay bar treatment</li>
+            <li data-i18n="svc1-f3">Tire & wheel clean</li>
+            <li data-i18n="svc1-f4">Carnauba wax coat</li>
+            <li data-i18n="svc1-f5">Glass & trim polish</li>
+          </ul>
+          <div class="service-price" data-i18n="svc1-price">From $99 <small>/ vehicle</small></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">✨</div>
+          <div class="service-name" data-i18n="svc2-name">Interior Detail</div>
+          <p class="service-desc" data-i18n="svc2-desc">Deep vacuum, steam clean, leather conditioning, and odor elimination — your cabin restored.</p>
+          <ul class="service-features">
+            <li data-i18n="svc2-f1">Full vacuum & blow-out</li>
+            <li data-i18n="svc2-f2">Steam clean & sanitize</li>
+            <li data-i18n="svc2-f3">Leather condition</li>
+            <li data-i18n="svc2-f4">Carpet shampoo</li>
+            <li data-i18n="svc2-f5">Odor treatment</li>
+          </ul>
+          <div class="service-price" data-i18n="svc2-price">From $120 <small>/ vehicle</small></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💎</div>
+          <div class="service-name" data-i18n="svc3-name">Full Detail</div>
+          <p class="service-desc" data-i18n="svc3-desc">The complete package — inside and out. Best value for a total refresh before a sale or special event.</p>
+          <ul class="service-features">
+            <li data-i18n="svc3-f1">Everything in Exterior</li>
+            <li data-i18n="svc3-f2">Everything in Interior</li>
+            <li data-i18n="svc3-f3">Engine bay clean</li>
+            <li data-i18n="svc3-f4">Paint decontamination</li>
+            <li data-i18n="svc3-f5">Ceramic spray coat</li>
+          </ul>
+          <div class="service-price" data-i18n="svc3-price">From $199 <small>/ vehicle</small></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <div class="service-name" data-i18n="svc4-name">Paint Correction</div>
+          <p class="service-desc" data-i18n="svc4-desc">Multi-stage machine polish removes swirls, scratches, and oxidation — revealing flawless paint beneath.</p>
+          <ul class="service-features">
+            <li data-i18n="svc4-f1">Swirl & scratch removal</li>
+            <li data-i18n="svc4-f2">Oxidation correction</li>
+            <li data-i18n="svc4-f3">Machine compound polish</li>
+            <li data-i18n="svc4-f4">Finishing polish</li>
+            <li data-i18n="svc4-f5">Paint sealant application</li>
+          </ul>
+          <div class="service-price" data-i18n="svc4-price">From $299 <small>/ vehicle</small></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🔬</div>
+          <div class="service-name" data-i18n="svc5-name">Ceramic Coating</div>
+          <p class="service-desc" data-i18n="svc5-desc">Professional-grade nano-ceramic protection that bonds to your paint, repelling water and contaminants for years.</p>
+          <ul class="service-features">
+            <li data-i18n="svc5-f1">Full decontamination prep</li>
+            <li data-i18n="svc5-f2">1-stage paint correction</li>
+            <li data-i18n="svc5-f3">Pro ceramic application</li>
+            <li data-i18n="svc5-f4">2–5 year protection</li>
+            <li data-i18n="svc5-f5">Hydrophobic finish</li>
+          </ul>
+          <div class="service-price" data-i18n="svc5-price">From $599 <small>/ vehicle</small></div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚙</div>
+          <div class="service-name" data-i18n="svc6-name">Fleet & Dealership</div>
+          <p class="service-desc" data-i18n="svc6-desc">Volume discounts and scheduled maintenance packages for fleets, dealerships, and rental agencies.</p>
+          <ul class="service-features">
+            <li data-i18n="svc6-f1">Custom pricing per unit</li>
+            <li data-i18n="svc6-f2">On-site at your lot</li>
+            <li data-i18n="svc6-f3">Recurring schedules</li>
+            <li data-i18n="svc6-f4">Dedicated account rep</li>
+            <li data-i18n="svc6-f5">Priority booking</li>
+          </ul>
+          <div class="service-price" data-i18n="svc6-price">Custom <small>pricing</small></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="section-pad">
+    <div class="container">
+      <div class="process-header">
+        <span class="section-label" data-i18n="proc-label">How It Works</span>
+        <h2 class="section-title" data-i18n="proc-title">Simple as 1, 2, 3</h2>
+        <p class="section-sub" data-i18n="proc-sub">We make the experience effortless from first tap to final buff.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title" data-i18n="step1-title">Book Online</div>
+          <p class="step-desc" data-i18n="step1-desc">Fill out our quick booking form — choose your service, vehicle type, and preferred time slot.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title" data-i18n="step2-title">We Come to You</div>
+          <p class="step-desc" data-i18n="step2-desc">Our fully-equipped mobile unit arrives at your home, office, or wherever you park.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title" data-i18n="step3-title">We Get to Work</div>
+          <p class="step-desc" data-i18n="step3-desc">Our pros handle everything start to finish — you don't lift a finger.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <div class="step-title" data-i18n="step4-title">Enjoy the Shine</div>
+          <p class="step-desc" data-i18n="step4-desc">Inspect your vehicle, approve the results, and drive away looking flawless.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section-pad">
+    <div class="container">
+      <span class="section-label" data-i18n="gal-label">Our Work</span>
+      <h2 class="section-title" data-i18n="gal-title">See the Difference</h2>
+      <p class="section-sub" style="margin-bottom:2rem" data-i18n="gal-sub">Every job is an opportunity to exceed expectations. Here's a glimpse of what we deliver.</p>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://placehold.co/600x500/0b0f18/1a2333" alt="Full Detail">
+          <div class="gallery-overlay"><span class="gallery-tag" data-i18n="gal-tag1">Full Detail</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://placehold.co/600x240/111827/1a2a3a" alt="Paint Correction">
+          <div class="gallery-overlay"><span class="gallery-tag" data-i18n="gal-tag2">Paint Correction</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://placehold.co/600x240/0f1a26/1a2a3a" alt="Interior Detail">
+          <div class="gallery-overlay"><span class="gallery-tag" data-i18n="gal-tag3">Interior Detail</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://placehold.co/600x240/0d1520/1a2333" alt="Ceramic Coating">
+          <div class="gallery-overlay"><span class="gallery-tag" data-i18n="gal-tag4">Ceramic Coating</span></div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://placehold.co/600x240/0a1018/111827" alt="Wheel & Tire">
+          <div class="gallery-overlay"><span class="gallery-tag" data-i18n="gal-tag5">Wheel &amp; Tire</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section-pad">
+    <div class="container">
+      <div class="testimonials-header">
+        <span class="section-label" data-i18n="test-label">Customer Reviews</span>
+        <h2 class="section-title" data-i18n="test-title">What Our Clients Say</h2>
+        <p class="section-sub" data-i18n="test-sub">Don't take our word for it — here's what real customers think.</p>
+      </div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Unbelievable results. My 10-year-old truck looks better than when I bought it. They came right to my driveway and had it done in 3 hours. Will never go to a car wash again."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">JM</div>
+            <div>
+              <div class="reviewer-name">James M.</div>
+              <div class="reviewer-meta" data-i18n="rev1-meta">Full Detail · Chevy Silverado</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Had the ceramic coating done before selling my car and got $2,000 more than I expected. Best investment I made. The Shine Guys are legit professionals."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">SK</div>
+            <div>
+              <div class="reviewer-name">Sara K.</div>
+              <div class="reviewer-meta" data-i18n="rev2-meta">Ceramic Coating · BMW 3 Series</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"I manage a fleet of 12 vehicles. The Shine Guys handle all of them on a monthly schedule — reliable, professional, and the pricing is excellent for the quality."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">RP</div>
+            <div>
+              <div class="reviewer-name">Robert P.</div>
+              <div class="reviewer-meta" data-i18n="rev3-meta">Fleet Account · 12 Vehicles</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"My dog destroyed the interior over 3 years. They brought it back to life — no smell, no stains. I was shocked. Total transformation. Highly recommend."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">AL</div>
+            <div>
+              <div class="reviewer-name">Ashley L.</div>
+              <div class="reviewer-meta" data-i18n="rev4-meta">Interior Detail · Honda CR-V</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Paint correction on my black Mercedes was flawless. Swirls completely gone, paint looks like glass. Worth every penny and then some."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">DT</div>
+            <div>
+              <div class="reviewer-name">David T.</div>
+              <div class="reviewer-meta" data-i18n="rev5-meta">Paint Correction · Mercedes C300</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Super easy to book, showed up on time, and the results speak for themselves. My car gets more compliments now than when it was new. Five stars easy."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">MR</div>
+            <div>
+              <div class="reviewer-name">Maria R.</div>
+              <div class="reviewer-meta" data-i18n="rev6-meta">Exterior Detail · Toyota Camry</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="section-pad">
+    <div class="container">
+      <div class="pricing-header">
+        <span class="section-label" data-i18n="price-label">Transparent Pricing</span>
+        <h2 class="section-title" data-i18n="price-title">Simple, Honest Rates</h2>
+        <p class="section-sub" data-i18n="price-sub">No hidden fees. No surprises. Just great results at a fair price.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="pricing-tier" data-i18n="price1-tier">Exterior</div>
+          <div class="pricing-price"><sup>$</sup>99<sub> &amp; up</sub></div>
+          <p class="pricing-desc" data-i18n="price1-desc">Hand wash, dry, wax, and tire shine. Great for regular maintenance.</p>
+          <ul class="pricing-list">
+            <li><span class="check">✓</span> <span data-i18n="price1-f1">Hand wash & dry</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price1-f2">Clay bar treatment</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price1-f3">Wheel & tire clean</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price1-f4">Carnauba wax</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price1-f5">Glass treatment</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price1-f6">Trim dressing</span></li>
+          </ul>
+          <a href="#contact" class="btn-pricing btn-pricing-outline" data-i18n="price1-btn">Book Exterior</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="pricing-badge" data-i18n="price2-badge">Most Popular</div>
+          <div class="pricing-tier" data-i18n="price2-tier">Full Detail</div>
+          <div class="pricing-price"><sup>$</sup>199<sub> &amp; up</sub></div>
+          <p class="pricing-desc" data-i18n="price2-desc">Complete inside and out restoration. Our best-selling package.</p>
+          <ul class="pricing-list">
+            <li><span class="check">✓</span> <span data-i18n="price2-f1">Everything in Exterior</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f2">Full interior clean</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f3">Steam sanitize</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f4">Leather condition</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f5">Carpet shampoo</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f6">Odor treatment</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price2-f7">Ceramic spray coat</span></li>
+          </ul>
+          <a href="#contact" class="btn-pricing btn-pricing-solid" data-i18n="price2-btn">Book Full Detail</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tier" data-i18n="price3-tier">Ceramic</div>
+          <div class="pricing-price"><sup>$</sup>599<sub> &amp; up</sub></div>
+          <p class="pricing-desc" data-i18n="price3-desc">Professional ceramic coating with paint correction prep. Years of protection.</p>
+          <ul class="pricing-list">
+            <li><span class="check">✓</span> <span data-i18n="price3-f1">Full decontamination</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price3-f2">Paint correction</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price3-f3">Pro ceramic coat</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price3-f4">2–5 year protection</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price3-f5">Hydrophobic finish</span></li>
+            <li><span class="check">✓</span> <span data-i18n="price3-f6">Maintenance kit</span></li>
+          </ul>
+          <a href="#contact" class="btn-pricing btn-pricing-outline" data-i18n="price3-btn">Book Ceramic</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO SHOWCASE -->
+  <section id="promo" class="section-pad">
+    <div class="container">
+      <div style="display:flex; align-items:center; gap:3rem; flex-wrap:wrap;">
+        <div style="flex:1; min-width:280px;">
+          <span class="section-label" data-i18n="promo-label">Featured Detail</span>
+          <h2 class="section-title" style="margin-bottom:1rem;" data-i18n="promo-title">Built for Cars<br>That Demand Attention.</h2>
+          <p class="section-sub" style="margin-bottom:2rem; color:#cde4f0;" data-i18n="promo-sub">From daily drivers to exotic builds — we treat every vehicle like it's the only one. Professional-grade products, flawless results, zero compromises.</p>
+          <a href="#contact" class="btn-primary"><span data-i18n="promo-btn">Book Your Detail</span></a>
+        </div>
+        <div style="flex:1; min-width:280px; border-radius:16px; overflow:hidden; border:1px solid rgba(42,181,245,0.15); box-shadow:0 0 60px rgba(42,181,245,0.08); background:#07090d; position:relative;">
+          <img src="Gemini_Generated_Image_5fhbko5fhbko5fhb.png" alt="Detailed black Corvette" style="width:100%; display:block; object-fit:cover; filter:brightness(0.75) contrast(1.1) saturate(0.8);" />
+          <div style="position:absolute; inset:0; background: radial-gradient(ellipse at center, transparent 35%, rgba(7,9,13,0.85) 100%), linear-gradient(to bottom, rgba(7,9,13,0.4) 0%, transparent 30%, transparent 70%, rgba(7,9,13,0.6) 100%);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section id="cta" class="section-pad" style="padding: 4rem 2rem;">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-text">
+          <span class="section-label" data-i18n="cta-label">Ready to Book?</span>
+          <h2 class="section-title" data-i18n="cta-title">We Come to You.<br>Anywhere in the Area.</h2>
+          <p class="section-sub" style="margin-bottom:0" data-i18n="cta-sub">Schedule in minutes. We handle the rest.</p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:0.75rem; flex-shrink:0;">
+          <a href="#contact" class="btn-primary" style="justify-content:center;" data-i18n="cta-btn1">
+            Book Your Detail Now
+          </a>
+          <a href="tel:+15551234567" class="btn-ghost" style="justify-content:center;" data-i18n="cta-btn2">
+            📞 Call Us Directly
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / BOOKING -->
+  <section id="contact" class="section-pad">
+    <div class="container">
+      <span class="section-label" data-i18n="cont-label">Get in Touch</span>
+      <h2 class="section-title" data-i18n="cont-title">Book Your Detail</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p style="font-size:0.9rem; color:var(--text); line-height:1.7; margin-bottom:0.5rem;" data-i18n="cont-intro">
+            Fill out the form and we'll confirm your booking within a few hours. Mobile service available 7 days a week.
+          </p>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label" data-i18n="cont-area-label">Service Area</div>
+              <div class="contact-value" data-i18n="cont-area-val">Your Home, Office, or Parking Lot</div>
+              <div class="contact-note" data-i18n="cont-area-note">We come to you — no drop-off needed</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label" data-i18n="cont-phone-label">Phone</div>
+              <div class="contact-value">(555) 123-4567</div>
+              <div class="contact-note" data-i18n="cont-phone-note">Mon–Sun · 7am – 7pm</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-label" data-i18n="cont-email-label">Email</div>
+              <div class="contact-value">book@theshineguys.com</div>
+              <div class="contact-note" data-i18n="cont-email-note">We reply within a few hours</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">⏱️</div>
+            <div>
+              <div class="contact-label" data-i18n="cont-hours-label">Hours</div>
+              <div class="contact-value" data-i18n="cont-hours-val">7 Days a Week</div>
+              <div class="contact-note">7:00am – 7:00pm</div>
+            </div>
+          </div>
+        </div>
+
+        <form class="booking-form" onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-fname">First Name</label>
+              <input type="text" class="form-input" data-i18n-ph="form-ph-fname" placeholder="John">
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-lname">Last Name</label>
+              <input type="text" class="form-input" data-i18n-ph="form-ph-lname" placeholder="Smith">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-phone">Phone</label>
+              <input type="tel" class="form-input" placeholder="(555) 000-0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-email">Email</label>
+              <input type="email" class="form-input" placeholder="you@email.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-service">Service</label>
+              <select class="form-select" id="form-svc-select">
+                <option value="" data-i18n="form-svc0">Select a service…</option>
+                <option data-i18n="form-svc1">Exterior Detail — from $99</option>
+                <option data-i18n="form-svc2">Interior Detail — from $120</option>
+                <option data-i18n="form-svc3">Full Detail — from $199</option>
+                <option data-i18n="form-svc4">Paint Correction — from $299</option>
+                <option data-i18n="form-svc5">Ceramic Coating — from $599</option>
+                <option data-i18n="form-svc6">Fleet / Custom Quote</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-i18n="form-vehicle">Vehicle Type</label>
+              <select class="form-select" id="form-veh-select">
+                <option value="" data-i18n="form-veh0">Select vehicle…</option>
+                <option data-i18n="form-veh1">Sedan / Coupe</option>
+                <option data-i18n="form-veh2">SUV / Crossover</option>
+                <option data-i18n="form-veh3">Truck</option>
+                <option data-i18n="form-veh4">Van / Minivan</option>
+                <option data-i18n="form-veh5">Sports Car / Exotic</option>
+                <option data-i18n="form-veh6">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form-address">Service Address</label>
+            <input type="text" class="form-input" placeholder="123 Main St, City, State">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form-datetime">Preferred Date & Time</label>
+            <input type="datetime-local" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form-notes">Additional Notes</label>
+            <textarea class="form-textarea" data-i18n-ph="form-notes-ph" placeholder="Any details about your vehicle's condition, specific concerns, or special requests…"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="border:none; cursor:pointer; width:100%; justify-content:center; font-size:0.9rem;" data-i18n="form-submit">
+            Request Booking
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <img src="logo.jpg" alt="The Shine Guys">
+          <span>The <em>Shine</em> Guys</span>
+        </a>
+        <p class="footer-tagline" data-i18n="foot-tagline">Premium mobile detailing that comes to you. Making cars shine across the area since 2021.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="foot-col1">Services</h4>
+        <ul>
+          <li><a href="#services" data-i18n="foot-ext">Exterior Detail</a></li>
+          <li><a href="#services" data-i18n="foot-int">Interior Detail</a></li>
+          <li><a href="#services" data-i18n="foot-full">Full Detail</a></li>
+          <li><a href="#services" data-i18n="foot-paint">Paint Correction</a></li>
+          <li><a href="#services" data-i18n="foot-ceramic">Ceramic Coating</a></li>
+          <li><a href="#services" data-i18n="foot-fleet">Fleet Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="foot-col2">Company</h4>
+        <ul>
+          <li><a href="#" data-i18n="foot-about">About Us</a></li>
+          <li><a href="#testimonials" data-i18n="foot-reviews">Reviews</a></li>
+          <li><a href="#gallery" data-i18n="foot-gallery">Gallery</a></li>
+          <li><a href="#pricing" data-i18n="foot-pricing">Pricing</a></li>
+          <li><a href="#contact" data-i18n="foot-contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="foot-col3">Contact</h4>
+        <ul>
+          <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+          <li><a href="mailto:book@theshineguys.com">book@theshineguys.com</a></li>
+          <li><a href="#" data-i18n="foot-hours">Mon–Sun · 7am–7pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="foot-copy">© 2024 The Shine Guys Mobile Detailing. All rights reserved.</span>
+      <span style="color:var(--blue);" data-i18n="foot-tagline2">✦ Making Cars Shine Since 2021</span>
+    </div>
+  </footer>
+
+<!-- CHATBOT WIDGET -->
+<style>
+  #chat-widget { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
+
+  #chat-toggle-btn {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--blue); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(42,181,245,0.5), 0 2px 8px rgba(0,0,0,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: #000; flex-shrink: 0;
+  }
+  #chat-toggle-btn:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(42,181,245,0.6); }
+
+  #chat-window {
+    width: 340px;
+    background: var(--dark2);
+    border: 1px solid rgba(42,181,245,0.18);
+    border-radius: 18px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.65), 0 0 0 1px rgba(42,181,245,0.05);
+    max-height: 490px;
+    transform-origin: bottom right;
+    transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+  }
+  #chat-window.chat-hidden { transform: scale(0.75) translateY(24px); opacity: 0; pointer-events: none; }
+
+  #chat-header {
+    background: linear-gradient(135deg, var(--dark3), var(--dark4));
+    border-bottom: 1px solid rgba(42,181,245,0.12);
+    padding: 0.85rem 1rem;
+    display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;
+  }
+  .chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue3), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.7rem; color: #000; flex-shrink: 0;
+    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.03em;
+  }
+  .chat-hdr-name { font-size: 0.88rem; font-weight: 700; color: var(--white); line-height: 1.2; }
+  .chat-hdr-status { font-size: 0.68rem; color: #4ade80; display: flex; align-items: center; gap: 0.3rem; margin-top: 0.1rem; }
+  .chat-hdr-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+  #chat-close-btn { margin-left: auto; background: none; border: none; color: var(--text); cursor: pointer; font-size: 1rem; padding: 0.2rem 0.4rem; line-height: 1; transition: color 0.2s; border-radius: 4px; }
+  #chat-close-btn:hover { color: var(--white); }
+
+  #chat-messages {
+    flex: 1; overflow-y: auto; padding: 1rem;
+    display: flex; flex-direction: column; gap: 0.65rem;
+    scroll-behavior: smooth; min-height: 0;
+  }
+  #chat-messages::-webkit-scrollbar { width: 3px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: rgba(42,181,245,0.2); border-radius: 2px; }
+
+  .cmsg { display: flex; flex-direction: column; max-width: 86%; }
+  .cmsg.bot { align-self: flex-start; }
+  .cmsg.usr { align-self: flex-end; }
+
+  .cbubble {
+    padding: 0.55rem 0.85rem; border-radius: 12px;
+    font-size: 0.82rem; line-height: 1.55; white-space: pre-line;
+  }
+  .cmsg.bot .cbubble { background: var(--dark3); color: var(--silver); border-bottom-left-radius: 3px; }
+  .cmsg.usr .cbubble { background: var(--blue); color: #000; font-weight: 600; border-bottom-right-radius: 3px; }
+
+  .ctyping { display: flex; align-items: center; gap: 4px; padding: 0.55rem 0.85rem; }
+  .ctyping span { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; opacity: 0.5; animation: cdot 1.2s infinite; }
+  .ctyping span:nth-child(2) { animation-delay: 0.2s; }
+  .ctyping span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes cdot { 0%,60%,100% { transform: translateY(0); opacity: 0.4; } 30% { transform: translateY(-5px); opacity: 1; } }
+
+  #chat-qr { padding: 0 0.75rem 0.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem; flex-shrink: 0; }
+  .qchip {
+    background: rgba(42,181,245,0.07); border: 1px solid rgba(42,181,245,0.25);
+    color: var(--blue); font-size: 0.71rem; font-weight: 600;
+    padding: 0.28rem 0.7rem; border-radius: 100px; cursor: pointer;
+    transition: background 0.18s; white-space: nowrap;
+    font-family: 'Inter', sans-serif; line-height: 1.4;
+  }
+  .qchip:hover { background: rgba(42,181,245,0.16); }
+
+  #chat-input-row {
+    padding: 0.65rem 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex; gap: 0.5rem; align-items: center;
+    background: var(--dark3); flex-shrink: 0;
+  }
+  #chat-inp {
+    flex: 1; background: var(--dark4); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px; color: var(--white); font-family: 'Inter', sans-serif;
+    font-size: 0.82rem; padding: 0.48rem 0.75rem; outline: none;
+    transition: border-color 0.2s; min-width: 0;
+  }
+  #chat-inp:focus { border-color: rgba(42,181,245,0.45); }
+  #chat-inp::placeholder { color: var(--text); }
+  #chat-send-btn {
+    background: var(--blue); border: none; color: #000; cursor: pointer;
+    width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+  }
+  #chat-send-btn:hover { background: var(--chrome); transform: scale(1.06); }
+
+  @media (max-width: 420px) { #chat-window { width: calc(100vw - 2rem); } #chat-widget { right: 1rem; bottom: 1rem; } }
+</style>
+
+<div id="chat-widget">
+  <div id="chat-window" class="chat-hidden">
+    <div id="chat-header">
+      <div class="chat-avatar">SG</div>
+      <div>
+        <div class="chat-hdr-name">The Shine Guys</div>
+        <div class="chat-hdr-status" id="chat-status-lbl">Online</div>
+      </div>
+      <button id="chat-close-btn" aria-label="Close">✕</button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-qr"></div>
+    <div id="chat-input-row">
+      <input type="text" id="chat-inp" placeholder="Ask us anything…" autocomplete="off">
+      <button id="chat-send-btn" aria-label="Send">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+  </div>
+  <button id="chat-toggle-btn" aria-label="Chat with us">
+    <svg id="chat-ico-open" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    <svg id="chat-ico-close" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  const R = {
+    en: {
+      welcome: "Hi there! 👋 I'm the Shine Guys assistant. Ask me about pricing, services, or booking!",
+      status: 'Online · Replies instantly',
+      ph: 'Ask us anything…',
+      chips: ['Pricing', 'Book Now', 'Services', 'Hours', 'Service Area'],
+      price:    "Our pricing:\n🚗 Exterior Detail — from $99\n✨ Interior Detail — from $120\n💎 Full Detail — from $199\n🛡️ Paint Correction — from $299\n🔬 Ceramic Coating — from $599\n\nAll services come to YOU. Ready to book?",
+      book:     "Awesome! 📅 Scroll down to our booking form — fill it out and we'll confirm within a few hours. We come straight to you!",
+      services: "We offer 6 services:\n🚗 Exterior Detail\n✨ Interior Detail\n💎 Full Detail\n🛡️ Paint Correction\n🔬 Ceramic Coating\n🚙 Fleet & Dealership\n\nAll performed at YOUR location!",
+      hours:    "⏱️ Open 7 days a week, 7am – 7pm. We come to your home, office, or parking lot — no drop-off needed!",
+      area:     "📍 We come to you! Home, office, or wherever you park. No drop-off. Just let us know your address when you book.",
+      contact:  "📞 (555) 123-4567\n📧 book@theshineguys.com\n⏱️ Mon–Sun · 7am – 7pm",
+      fallback: "Good question! For details, give us a call at (555) 123-4567 or fill out the booking form on this page. 😊"
+    },
+    es: {
+      welcome: "¡Hola! 👋 Soy el asistente de The Shine Guys. ¡Pregúntame sobre precios, servicios o reservas!",
+      status: 'En línea · Responde al instante',
+      ph: 'Pregúntanos lo que quieras…',
+      chips: ['Precios', 'Reservar', 'Servicios', 'Horario', 'Área de Servicio'],
+      price:    "Nuestros precios:\n🚗 Detallado Exterior — desde $99\n✨ Detallado Interior — desde $120\n💎 Detallado Completo — desde $199\n🛡️ Corrección de Pintura — desde $299\n🔬 Recubrimiento Cerámico — desde $599\n\n¡Todos los servicios van a TI. ¿Listo para reservar?",
+      book:     "¡Genial! 📅 Baja al formulario de reserva — llénalo y confirmaremos en pocas horas. ¡Vamos directo a ti!",
+      services: "Ofrecemos 6 servicios:\n🚗 Detallado Exterior\n✨ Detallado Interior\n💎 Detallado Completo\n🛡️ Corrección de Pintura\n🔬 Recubrimiento Cerámico\n🚙 Flota y Concesionarios\n\n¡Todos en TU ubicación!",
+      hours:    "⏱️ Disponibles 7 días a la semana, 7am – 7pm. ¡Vamos a tu casa, oficina o estacionamiento — sin necesidad de dejar tu auto!",
+      area:     "📍 ¡Vamos a ti! Casa, oficina o donde estaciones tu auto. Sin traslados. Solo danos tu dirección al reservar.",
+      contact:  "📞 (555) 123-4567\n📧 book@theshineguys.com\n⏱️ Lun–Dom · 7am – 7pm",
+      fallback: "¡Buena pregunta! Para más detalles, llámanos al (555) 123-4567 o llena el formulario en esta página. 😊"
+    }
+  };
+
+  function lang() { return (typeof currentLang !== 'undefined' ? currentLang : 'en'); }
+
+  function respond(text) {
+    const t = text.toLowerCase(), r = R[lang()];
+    if (/price|cost|how much|rate|pricing|precio|costo|cuánto|cuanto|cobran|tarifa/.test(t)) return r.price;
+    if (/book|schedul|appoint|reserv|agenda/.test(t)) return r.book;
+    if (/service|offer|what.*do|ceramic|exterior|interior|paint|fleet|detail|servicio|ofrec/.test(t)) return r.services;
+    if (/hour|open|when|availab|days|hora|horario|cuándo|cuando|días|dias|abierto/.test(t)) return r.hours;
+    if (/where|area|location|come|travel|address|near|donde|área|ubicación|vienen|llegan/.test(t)) return r.area;
+    if (/phone|call|contact|number|email|reach|teléfono|llamar|correo/.test(t)) return r.contact;
+    if (/hi|hello|hey|hola|buenos|buenas|good|greet/.test(t)) return R[lang()].welcome;
+    return r.fallback;
+  }
+
+  const win     = document.getElementById('chat-window');
+  const msgs    = document.getElementById('chat-messages');
+  const inp     = document.getElementById('chat-inp');
+  const sendBtn = document.getElementById('chat-send-btn');
+  const togBtn  = document.getElementById('chat-toggle-btn');
+  const closeBtn= document.getElementById('chat-close-btn');
+  const qrDiv   = document.getElementById('chat-qr');
+  const icoOpen = document.getElementById('chat-ico-open');
+  const icoClose= document.getElementById('chat-ico-close');
+  const statusEl= document.getElementById('chat-status-lbl');
+  let open = false, greeted = false;
+
+  function addMsg(text, type) {
+    const w = document.createElement('div');
+    w.className = 'cmsg ' + type;
+    const b = document.createElement('div');
+    b.className = 'cbubble';
+    b.textContent = text;
+    w.appendChild(b);
+    msgs.appendChild(w);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function showTyping() {
+    const w = document.createElement('div');
+    w.className = 'cmsg bot'; w.id = 'ctyping';
+    w.innerHTML = '<div class="cbubble ctyping"><span></span><span></span><span></span></div>';
+    msgs.appendChild(w);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function removeTyping() { const t = document.getElementById('ctyping'); if (t) t.remove(); }
+
+  function buildChips() {
+    qrDiv.innerHTML = '';
+    R[lang()].chips.forEach(label => {
+      const btn = document.createElement('button');
+      btn.className = 'qchip'; btn.textContent = label;
+      btn.addEventListener('click', () => { send(label); qrDiv.innerHTML = ''; });
+      qrDiv.appendChild(btn);
+    });
+  }
+
+  function send(text) {
+    if (!text.trim()) return;
+    addMsg(text, 'usr');
+    inp.value = '';
+    showTyping();
+    setTimeout(() => { removeTyping(); addMsg(respond(text), 'bot'); }, 650 + Math.random() * 350);
+  }
+
+  function openChat() {
+    open = true;
+    win.classList.remove('chat-hidden');
+    icoOpen.style.display = 'none'; icoClose.style.display = '';
+    const r = R[lang()];
+    statusEl.textContent = r.status;
+    inp.placeholder = r.ph;
+    if (!greeted) {
+      greeted = true;
+      setTimeout(() => { addMsg(r.welcome, 'bot'); buildChips(); }, 350);
+    }
+    setTimeout(() => inp.focus(), 450);
+  }
+
+  function closeChat() {
+    open = false;
+    win.classList.add('chat-hidden');
+    icoOpen.style.display = ''; icoClose.style.display = 'none';
+  }
+
+  togBtn.addEventListener('click', () => open ? closeChat() : openChat());
+  closeBtn.addEventListener('click', closeChat);
+  sendBtn.addEventListener('click', () => send(inp.value));
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') send(inp.value); });
+})();
+</script>
+
+<script>
+const T = {
+  en: {
+    'nav-services':'Services','nav-process':'Process','nav-pricing':'Pricing','nav-reviews':'Reviews','nav-book':'Book Now',
+    'hero-badge':'Now Serving Your Area','hero-line1':'Your Car Deserves','hero-line2':'To Shine.',
+    'hero-sub':'Premium mobile detailing delivered straight to your driveway. No drop-offs. No waiting. Just a showroom finish — on your schedule.',
+    'hero-btn-book':'Book a Detail','hero-btn-services':'View Services',
+    'stat-cars':'Cars Detailed','stat-rating':'Average Rating','stat-years':'Years in Business','stat-sat':'Satisfaction',
+    'svc-label':'What We Offer','svc-title':'Professional Detailing<br>At Your Location',
+    'svc-sub':'From a quick exterior wash to a full interior restoration — we bring the equipment, you stay home.',
+    'svc1-name':'Exterior Detail','svc1-desc':'A thorough hand wash, clay bar, and protective wax coating that restores that factory-fresh gloss.',
+    'svc1-f1':'Hand wash & dry','svc1-f2':'Clay bar treatment','svc1-f3':'Tire & wheel clean','svc1-f4':'Carnauba wax coat','svc1-f5':'Glass & trim polish',
+    'svc1-price':'From $99 <small>/ vehicle</small>',
+    'svc2-name':'Interior Detail','svc2-desc':'Deep vacuum, steam clean, leather conditioning, and odor elimination — your cabin restored.',
+    'svc2-f1':'Full vacuum & blow-out','svc2-f2':'Steam clean & sanitize','svc2-f3':'Leather condition','svc2-f4':'Carpet shampoo','svc2-f5':'Odor treatment',
+    'svc2-price':'From $120 <small>/ vehicle</small>',
+    'svc3-name':'Full Detail','svc3-desc':'The complete package — inside and out. Best value for a total refresh before a sale or special event.',
+    'svc3-f1':'Everything in Exterior','svc3-f2':'Everything in Interior','svc3-f3':'Engine bay clean','svc3-f4':'Paint decontamination','svc3-f5':'Ceramic spray coat',
+    'svc3-price':'From $199 <small>/ vehicle</small>',
+    'svc4-name':'Paint Correction','svc4-desc':'Multi-stage machine polish removes swirls, scratches, and oxidation — revealing flawless paint beneath.',
+    'svc4-f1':'Swirl & scratch removal','svc4-f2':'Oxidation correction','svc4-f3':'Machine compound polish','svc4-f4':'Finishing polish','svc4-f5':'Paint sealant application',
+    'svc4-price':'From $299 <small>/ vehicle</small>',
+    'svc5-name':'Ceramic Coating','svc5-desc':'Professional-grade nano-ceramic protection that bonds to your paint, repelling water and contaminants for years.',
+    'svc5-f1':'Full decontamination prep','svc5-f2':'1-stage paint correction','svc5-f3':'Pro ceramic application','svc5-f4':'2–5 year protection','svc5-f5':'Hydrophobic finish',
+    'svc5-price':'From $599 <small>/ vehicle</small>',
+    'svc6-name':'Fleet & Dealership','svc6-desc':'Volume discounts and scheduled maintenance packages for fleets, dealerships, and rental agencies.',
+    'svc6-f1':'Custom pricing per unit','svc6-f2':'On-site at your lot','svc6-f3':'Recurring schedules','svc6-f4':'Dedicated account rep','svc6-f5':'Priority booking',
+    'svc6-price':'Custom <small>pricing</small>',
+    'proc-label':'How It Works','proc-title':'Simple as 1, 2, 3','proc-sub':'We make the experience effortless from first tap to final buff.',
+    'step1-title':'Book Online','step1-desc':'Fill out our quick booking form — choose your service, vehicle type, and preferred time slot.',
+    'step2-title':'We Come to You','step2-desc':'Our fully-equipped mobile unit arrives at your home, office, or wherever you park.',
+    'step3-title':'We Get to Work','step3-desc':"Our pros handle everything start to finish — you don't lift a finger.",
+    'step4-title':'Enjoy the Shine','step4-desc':'Inspect your vehicle, approve the results, and drive away looking flawless.',
+    'gal-label':'Our Work','gal-title':'See the Difference','gal-sub':"Every job is an opportunity to exceed expectations. Here's a glimpse of what we deliver.",
+    'gal-tag1':'Full Detail','gal-tag2':'Paint Correction','gal-tag3':'Interior Detail','gal-tag4':'Ceramic Coating','gal-tag5':'Wheel &amp; Tire',
+    'test-label':'Customer Reviews','test-title':'What Our Clients Say','test-sub':"Don't take our word for it — here's what real customers think.",
+    'rev1-meta':'Full Detail · Chevy Silverado','rev2-meta':'Ceramic Coating · BMW 3 Series','rev3-meta':'Fleet Account · 12 Vehicles',
+    'rev4-meta':'Interior Detail · Honda CR-V','rev5-meta':'Paint Correction · Mercedes C300','rev6-meta':'Exterior Detail · Toyota Camry',
+    'price-label':'Transparent Pricing','price-title':'Simple, Honest Rates','price-sub':'No hidden fees. No surprises. Just great results at a fair price.',
+    'price1-tier':'Exterior','price1-desc':'Hand wash, dry, wax, and tire shine. Great for regular maintenance.',
+    'price1-f1':'Hand wash & dry','price1-f2':'Clay bar treatment','price1-f3':'Wheel & tire clean','price1-f4':'Carnauba wax','price1-f5':'Glass treatment','price1-f6':'Trim dressing',
+    'price1-btn':'Book Exterior',
+    'price2-badge':'Most Popular','price2-tier':'Full Detail','price2-desc':'Complete inside and out restoration. Our best-selling package.',
+    'price2-f1':'Everything in Exterior','price2-f2':'Full interior clean','price2-f3':'Steam sanitize','price2-f4':'Leather condition','price2-f5':'Carpet shampoo','price2-f6':'Odor treatment','price2-f7':'Ceramic spray coat',
+    'price2-btn':'Book Full Detail',
+    'price3-tier':'Ceramic','price3-desc':'Professional ceramic coating with paint correction prep. Years of protection.',
+    'price3-f1':'Full decontamination','price3-f2':'Paint correction','price3-f3':'Pro ceramic coat','price3-f4':'2–5 year protection','price3-f5':'Hydrophobic finish','price3-f6':'Maintenance kit',
+    'price3-btn':'Book Ceramic',
+    'promo-label':'Featured Detail','promo-title':'Built for Cars<br>That Demand Attention.',
+    'promo-sub':"From daily drivers to exotic builds — we treat every vehicle like it's the only one. Professional-grade products, flawless results, zero compromises.",
+    'promo-btn':'Book Your Detail',
+    'cta-label':'Ready to Book?','cta-title':'We Come to You.<br>Anywhere in the Area.','cta-sub':'Schedule in minutes. We handle the rest.',
+    'cta-btn1':'Book Your Detail Now','cta-btn2':'📞 Call Us Directly',
+    'cont-label':'Get in Touch','cont-title':'Book Your Detail',
+    'cont-intro':"Fill out the form and we'll confirm your booking within a few hours. Mobile service available 7 days a week.",
+    'cont-area-label':'Service Area','cont-area-val':'Your Home, Office, or Parking Lot','cont-area-note':'We come to you — no drop-off needed',
+    'cont-phone-label':'Phone','cont-phone-note':'Mon–Sun · 7am – 7pm',
+    'cont-email-label':'Email','cont-email-note':'We reply within a few hours',
+    'cont-hours-label':'Hours','cont-hours-val':'7 Days a Week',
+    'form-fname':'First Name','form-lname':'Last Name','form-phone':'Phone','form-email':'Email',
+    'form-service':'Service','form-vehicle':'Vehicle Type','form-address':'Service Address','form-datetime':'Preferred Date & Time','form-notes':'Additional Notes',
+    'form-ph-fname':'John','form-ph-lname':'Smith',
+    'form-svc0':'Select a service…','form-svc1':'Exterior Detail — from $99','form-svc2':'Interior Detail — from $120','form-svc3':'Full Detail — from $199',
+    'form-svc4':'Paint Correction — from $299','form-svc5':'Ceramic Coating — from $599','form-svc6':'Fleet / Custom Quote',
+    'form-veh0':'Select vehicle…','form-veh1':'Sedan / Coupe','form-veh2':'SUV / Crossover','form-veh3':'Truck','form-veh4':'Van / Minivan','form-veh5':'Sports Car / Exotic','form-veh6':'Other',
+    'form-notes-ph':"Any details about your vehicle's condition, specific concerns, or special requests…",
+    'form-submit':'Request Booking',
+    'foot-tagline':'Premium mobile detailing that comes to you. Making cars shine across the area since 2021.',
+    'foot-col1':'Services','foot-ext':'Exterior Detail','foot-int':'Interior Detail','foot-full':'Full Detail','foot-paint':'Paint Correction','foot-ceramic':'Ceramic Coating','foot-fleet':'Fleet Services',
+    'foot-col2':'Company','foot-about':'About Us','foot-reviews':'Reviews','foot-gallery':'Gallery','foot-pricing':'Pricing','foot-contact':'Contact',
+    'foot-col3':'Contact','foot-hours':'Mon–Sun · 7am–7pm',
+    'foot-copy':'© 2024 The Shine Guys Mobile Detailing. All rights reserved.',
+    'foot-tagline2':'✦ Making Cars Shine Since 2021'
+  },
+  es: {
+    'nav-services':'Servicios','nav-process':'Proceso','nav-pricing':'Precios','nav-reviews':'Reseñas','nav-book':'Reservar',
+    'hero-badge':'Sirviendo Tu Área','hero-line1':'Tu Auto Merece','hero-line2':'Brillar.',
+    'hero-sub':'Detallado móvil premium directo a tu entrada. Sin traslados. Sin esperas. Un acabado de exhibición — a tu horario.',
+    'hero-btn-book':'Reservar Detallado','hero-btn-services':'Ver Servicios',
+    'stat-cars':'Autos Detallados','stat-rating':'Calificación Promedio','stat-years':'Años en el Negocio','stat-sat':'Satisfacción',
+    'svc-label':'Lo Que Ofrecemos','svc-title':'Detallado Profesional<br>En Tu Ubicación',
+    'svc-sub':'Desde un lavado exterior rápido hasta una restauración interior completa — nosotros traemos el equipo, tú te quedas en casa.',
+    'svc1-name':'Detallado Exterior','svc1-desc':'Un minucioso lavado a mano, arcilla descontaminante y cera protectora que restaura el brillo de fábrica.',
+    'svc1-f1':'Lavado y secado a mano','svc1-f2':'Tratamiento de arcilla','svc1-f3':'Limpieza de llantas','svc1-f4':'Cera de carnauba','svc1-f5':'Pulido de vidrios y molduras',
+    'svc1-price':'Desde $99 <small>/ vehículo</small>',
+    'svc2-name':'Detallado Interior','svc2-desc':'Aspirado profundo, limpieza a vapor, acondicionamiento de cuero y eliminación de olores — tu habitáculo restaurado.',
+    'svc2-f1':'Aspirado completo','svc2-f2':'Limpieza a vapor y sanitización','svc2-f3':'Acondicionamiento de cuero','svc2-f4':'Champú de alfombras','svc2-f5':'Tratamiento de olores',
+    'svc2-price':'Desde $120 <small>/ vehículo</small>',
+    'svc3-name':'Detallado Completo','svc3-desc':'El paquete completo — por dentro y por fuera. Mejor valor para una renovación total antes de una venta o evento especial.',
+    'svc3-f1':'Todo en Exterior','svc3-f2':'Todo en Interior','svc3-f3':'Limpieza del motor','svc3-f4':'Descontaminación de pintura','svc3-f5':'Recubrimiento cerámico en spray',
+    'svc3-price':'Desde $199 <small>/ vehículo</small>',
+    'svc4-name':'Corrección de Pintura','svc4-desc':'El pulido mecánico de múltiples etapas elimina remolinos, rayones y oxidación — revelando una pintura impecable.',
+    'svc4-f1':'Eliminación de remolinos y rayones','svc4-f2':'Corrección de oxidación','svc4-f3':'Pulido de compuesto mecánico','svc4-f4':'Pulido de acabado','svc4-f5':'Aplicación de sellador',
+    'svc4-price':'Desde $299 <small>/ vehículo</small>',
+    'svc5-name':'Recubrimiento Cerámico','svc5-desc':'Protección nano-cerámica de grado profesional que se adhiere a tu pintura, repeliendo agua y contaminantes por años.',
+    'svc5-f1':'Preparación de descontaminación','svc5-f2':'Corrección de pintura de 1 etapa','svc5-f3':'Aplicación cerámica profesional','svc5-f4':'Protección de 2–5 años','svc5-f5':'Acabado hidrofóbico',
+    'svc5-price':'Desde $599 <small>/ vehículo</small>',
+    'svc6-name':'Flota y Concesionarios','svc6-desc':'Descuentos por volumen y paquetes de mantenimiento programado para flotas, concesionarios y agencias de renta.',
+    'svc6-f1':'Precio personalizado por unidad','svc6-f2':'En tu lote','svc6-f3':'Programas recurrentes','svc6-f4':'Representante de cuenta dedicado','svc6-f5':'Reserva prioritaria',
+    'svc6-price':'Precio <small>personalizado</small>',
+    'proc-label':'Cómo Funciona','proc-title':'Tan Simple como 1, 2, 3','proc-sub':'Hacemos la experiencia sin esfuerzo desde el primer toque hasta el último pulido.',
+    'step1-title':'Reserva en Línea','step1-desc':'Llena nuestro formulario rápido — elige tu servicio, tipo de vehículo y horario preferido.',
+    'step2-title':'Vamos a Ti','step2-desc':'Nuestra unidad móvil completamente equipada llega a tu casa, oficina o donde estaciones tu auto.',
+    'step3-title':'Nos Ponemos a Trabajar','step3-desc':'Nuestros profesionales se encargan de todo de principio a fin — tú no mueves un dedo.',
+    'step4-title':'Disfruta el Brillo','step4-desc':'Inspecciona tu vehículo, aprueba los resultados y conduce luciendo impecable.',
+    'gal-label':'Nuestro Trabajo','gal-title':'Ve la Diferencia','gal-sub':'Cada trabajo es una oportunidad para superar expectativas. Aquí hay un vistazo de lo que entregamos.',
+    'gal-tag1':'Detallado Completo','gal-tag2':'Corrección de Pintura','gal-tag3':'Detallado Interior','gal-tag4':'Recubrimiento Cerámico','gal-tag5':'Llantas y Neumáticos',
+    'test-label':'Opiniones de Clientes','test-title':'Lo Que Dicen Nuestros Clientes','test-sub':'No lo tomes solo de nosotros — esto es lo que piensan clientes reales.',
+    'rev1-meta':'Detallado Completo · Chevy Silverado','rev2-meta':'Recubrimiento Cerámico · BMW 3 Series','rev3-meta':'Cuenta de Flota · 12 Vehículos',
+    'rev4-meta':'Detallado Interior · Honda CR-V','rev5-meta':'Corrección de Pintura · Mercedes C300','rev6-meta':'Detallado Exterior · Toyota Camry',
+    'price-label':'Precios Transparentes','price-title':'Tarifas Simples y Honestas','price-sub':'Sin cargos ocultos. Sin sorpresas. Solo excelentes resultados a un precio justo.',
+    'price1-tier':'Exterior','price1-desc':'Lavado a mano, secado, cera y brillo de llantas. Ideal para mantenimiento regular.',
+    'price1-f1':'Lavado y secado a mano','price1-f2':'Tratamiento de arcilla','price1-f3':'Limpieza de llantas','price1-f4':'Cera de carnauba','price1-f5':'Tratamiento de vidrios','price1-f6':'Acondicionador de molduras',
+    'price1-btn':'Reservar Exterior',
+    'price2-badge':'Más Popular','price2-tier':'Detallado Completo','price2-desc':'Restauración completa por dentro y por fuera. Nuestro paquete más vendido.',
+    'price2-f1':'Todo en Exterior','price2-f2':'Limpieza interior completa','price2-f3':'Sanitización a vapor','price2-f4':'Acondicionamiento de cuero','price2-f5':'Champú de alfombras','price2-f6':'Tratamiento de olores','price2-f7':'Recubrimiento cerámico en spray',
+    'price2-btn':'Reservar Detallado Completo',
+    'price3-tier':'Cerámico','price3-desc':'Recubrimiento cerámico profesional con preparación de corrección de pintura. Años de protección.',
+    'price3-f1':'Descontaminación completa','price3-f2':'Corrección de pintura','price3-f3':'Cerámica profesional','price3-f4':'Protección de 2–5 años','price3-f5':'Acabado hidrofóbico','price3-f6':'Kit de mantenimiento',
+    'price3-btn':'Reservar Cerámico',
+    'promo-label':'Detallado Destacado','promo-title':'Hecho para Autos<br>Que Exigen Atención.',
+    'promo-sub':'Desde autos del día a día hasta construcciones exóticas — tratamos cada vehículo como si fuera el único. Productos de grado profesional, resultados impecables, cero compromisos.',
+    'promo-btn':'Reserva Tu Detallado',
+    'cta-label':'¿Listo para Reservar?','cta-title':'Vamos a Ti.<br>En Cualquier Lugar del Área.','cta-sub':'Agenda en minutos. Nosotros nos encargamos del resto.',
+    'cta-btn1':'Reserva Tu Detallado Ahora','cta-btn2':'📞 Llámanos Directamente',
+    'cont-label':'Contáctanos','cont-title':'Reserva Tu Detallado',
+    'cont-intro':'Llena el formulario y confirmaremos tu reserva en pocas horas. Servicio móvil disponible los 7 días de la semana.',
+    'cont-area-label':'Área de Servicio','cont-area-val':'Tu Casa, Oficina o Estacionamiento','cont-area-note':'Vamos a ti — sin necesidad de dejar tu auto',
+    'cont-phone-label':'Teléfono','cont-phone-note':'Lun–Dom · 7am – 7pm',
+    'cont-email-label':'Correo','cont-email-note':'Respondemos en pocas horas',
+    'cont-hours-label':'Horario','cont-hours-val':'7 Días a la Semana',
+    'form-fname':'Nombre','form-lname':'Apellido','form-phone':'Teléfono','form-email':'Correo',
+    'form-service':'Servicio','form-vehicle':'Tipo de Vehículo','form-address':'Dirección de Servicio','form-datetime':'Fecha y Hora Preferida','form-notes':'Notas Adicionales',
+    'form-ph-fname':'Juan','form-ph-lname':'García',
+    'form-svc0':'Selecciona un servicio…','form-svc1':'Detallado Exterior — desde $99','form-svc2':'Detallado Interior — desde $120','form-svc3':'Detallado Completo — desde $199',
+    'form-svc4':'Corrección de Pintura — desde $299','form-svc5':'Recubrimiento Cerámico — desde $599','form-svc6':'Flota / Cotización Personalizada',
+    'form-veh0':'Selecciona vehículo…','form-veh1':'Sedán / Cupé','form-veh2':'SUV / Crossover','form-veh3':'Camioneta','form-veh4':'Van / Minivan','form-veh5':'Auto Deportivo / Exótico','form-veh6':'Otro',
+    'form-notes-ph':'Detalles sobre el estado de tu vehículo, preocupaciones específicas o solicitudes especiales…',
+    'form-submit':'Solicitar Reserva',
+    'foot-tagline':'Detallado móvil premium que llega a ti. Haciendo brillar autos en el área desde 2021.',
+    'foot-col1':'Servicios','foot-ext':'Detallado Exterior','foot-int':'Detallado Interior','foot-full':'Detallado Completo','foot-paint':'Corrección de Pintura','foot-ceramic':'Recubrimiento Cerámico','foot-fleet':'Servicios de Flota',
+    'foot-col2':'Empresa','foot-about':'Sobre Nosotros','foot-reviews':'Reseñas','foot-gallery':'Galería','foot-pricing':'Precios','foot-contact':'Contacto',
+    'foot-col3':'Contacto','foot-hours':'Lun–Dom · 7am–7pm',
+    'foot-copy':'© 2024 The Shine Guys Mobile Detailing. Todos los derechos reservados.',
+    'foot-tagline2':'✦ Haciendo Brillar Autos Desde 2021'
+  }
+};
+
+let currentLang = localStorage.getItem('shine-lang') || 'en';
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
+  });
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = lang === 'en' ? 'ES' : 'EN';
+  localStorage.setItem('shine-lang', lang);
+}
+
+document.getElementById('lang-toggle').addEventListener('click', () => {
+  applyLang(currentLang === 'en' ? 'es' : 'en');
+});
+
+applyLang(currentLang);
+</script>
+
+</body>
+</html>

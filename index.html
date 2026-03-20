@@ -28,7 +28,7 @@
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(rgba(7,9,13,0.55), rgba(7,9,13,0.55)), url('1000019979.jpg') center / cover fixed;
+      background: linear-gradient(rgba(7,9,13,0.35), rgba(7,9,13,0.35)), url('1000020195.png') center / cover fixed;
       color: var(--white);
       line-height: 1.7;
       overflow-x: hidden;
@@ -54,7 +54,7 @@
     }
 
     .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
-    .nav-logo img { height: 40px; border-radius: 50%; }
+    .nav-logo img { height: 48px; border-radius: 8px; }
     .nav-logo span {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 1.15rem; font-weight: 800;
@@ -238,7 +238,7 @@
     }
 
     /* ─── SERVICES ─── */
-    #services { background: rgba(11,15,24,0.82); }
+    #services { background: rgba(11,15,24,0.45); }
 
     .services-header { text-align: center; }
     .services-header .section-sub { margin-left: auto; margin-right: auto; }
@@ -254,12 +254,12 @@
     }
 
     .service-card {
-      background: var(--dark2);
+      background: rgba(11,15,24,0.55);
       padding: 2.25rem 2rem;
       transition: background 0.25s;
       cursor: default;
     }
-    .service-card:hover { background: var(--dark3); }
+    .service-card:hover { background: rgba(17,24,39,0.7); }
 
     .service-icon {
       width: 48px; height: 48px;
@@ -300,7 +300,7 @@
     .service-price small { font-size: 0.85rem; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; }
 
     /* ─── HOW IT WORKS ─── */
-    #process { background: rgba(7,9,13,0.82); }
+    #process { background: rgba(7,9,13,0.45); }
 
     .process-header { text-align: center; }
     .process-header .section-sub { margin-left: auto; margin-right: auto; }
@@ -343,7 +343,7 @@
     .step-desc { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
 
     /* ─── GALLERY / BEFORE AFTER ─── */
-    #gallery { background: rgba(11,15,24,0.82); }
+    #gallery { background: rgba(11,15,24,0.45); }
 
     .gallery-grid {
       display: grid;
@@ -390,7 +390,7 @@
     }
 
     /* ─── TESTIMONIALS ─── */
-    #testimonials { background: rgba(7,9,13,0.82); }
+    #testimonials { background: rgba(7,9,13,0.45); }
 
     .testimonials-header { text-align: center; }
     .testimonials-header .section-sub { margin-left: auto; margin-right: auto; }
@@ -402,7 +402,7 @@
     }
 
     .review-card {
-      background: var(--dark3);
+      background: rgba(17,24,39,0.5);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 14px;
       padding: 1.75rem;
@@ -442,7 +442,7 @@
     .reviewer-meta { font-size: 0.72rem; color: var(--text); }
 
     /* ─── PRICING ─── */
-    #pricing { background: rgba(11,15,24,0.82); }
+    #pricing { background: rgba(11,15,24,0.45); }
 
     .pricing-header { text-align: center; }
     .pricing-header .section-sub { margin-left: auto; margin-right: auto; }
@@ -455,7 +455,7 @@
     }
 
     .pricing-card {
-      background: var(--dark3);
+      background: rgba(17,24,39,0.5);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
       padding: 2rem;
@@ -529,11 +529,11 @@
     }
 
     /* ─── PROMO SHOWCASE ─── */
-    #promo { background: rgba(7,9,13,0.82); }
+    #promo { background: rgba(7,9,13,0.45); }
 
     /* ─── CTA BANNER ─── */
     #cta {
-      background: linear-gradient(135deg, var(--dark3) 0%, var(--dark4) 100%);
+      background: linear-gradient(135deg, rgba(17,24,39,0.55) 0%, rgba(26,35,51,0.55) 100%);
       border-top: 1px solid rgba(42,181,245,0.1);
       border-bottom: 1px solid rgba(42,181,245,0.1);
     }
@@ -547,7 +547,7 @@
     .cta-text .section-sub { margin-bottom: 0; }
 
     /* ─── CONTACT ─── */
-    #contact { background: rgba(7,9,13,0.82); }
+    #contact { background: rgba(7,9,13,0.45); }
 
     .contact-grid {
       display: grid;
@@ -589,7 +589,7 @@
     }
 
     .form-input, .form-select, .form-textarea {
-      background: var(--dark3);
+      background: rgba(17,24,39,0.6);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
       color: var(--white);
@@ -610,7 +610,7 @@
 
     /* ─── FOOTER ─── */
     footer {
-      background: rgba(11,15,24,0.88);
+      background: rgba(11,15,24,0.55);
       border-top: 1px solid rgba(255,255,255,0.05);
       padding: 3rem 2rem 2rem;
     }
@@ -625,7 +625,7 @@
 
     .footer-brand {}
     .footer-logo { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; text-decoration: none; }
-    .footer-logo img { height: 36px; border-radius: 50%; }
+    .footer-logo img { height: 44px; border-radius: 8px; }
     .footer-logo span {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 1.05rem; font-weight: 800;
@@ -634,6 +634,18 @@
     .footer-logo span em { color: var(--blue); font-style: normal; }
 
     .footer-tagline { font-size: 0.85rem; color: var(--text); line-height: 1.65; max-width: 240px; }
+
+    .footer-social { display: flex; gap: 0.6rem; margin-top: 1.25rem; }
+    .social-link {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      color: var(--text); text-decoration: none;
+      transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .social-link:hover { background: rgba(42,181,245,0.12); color: var(--blue); border-color: rgba(42,181,245,0.3); transform: translateY(-2px); }
+    .social-link svg { width: 16px; height: 16px; }
 
     .footer-col h4 {
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
@@ -687,7 +699,7 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <img src="logo.jpg" alt="The Shine Guys">
+      <img src="1000020195.png" alt="The Shine Guys">
       <span>The <em>Shine</em> Guys</span>
     </a>
     <ul class="nav-links">
@@ -1213,10 +1225,32 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="#" class="footer-logo">
-          <img src="logo.jpg" alt="The Shine Guys">
+          <img src="1000020195.png" alt="The Shine Guys">
           <span>The <em>Shine</em> Guys</span>
         </a>
         <p class="footer-tagline" data-i18n="foot-tagline">Premium mobile detailing that comes to you. Making cars shine across the area since 2021.</p>
+        <div class="footer-social">
+          <!-- Instagram -->
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <!-- TikTok -->
+          <a href="#" class="social-link" aria-label="TikTok">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+          </a>
+          <!-- Google / Yelp -->
+          <a href="#" class="social-link" aria-label="Google Reviews">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M21.35 11.1H12.18V13.83H18.69C18.36 17.64 15.19 19.27 12.19 19.27C8.36 19.27 5 16.25 5 12C5 7.9 8.2 4.73 12.2 4.73C15.29 4.73 17.1 6.7 17.1 6.7L19 4.72C19 4.72 16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12C2.03 17.05 6.16 22 12.25 22C17.6 22 21.5 18.33 21.5 12.91C21.5 11.76 21.35 11.1 21.35 11.1Z"/></svg>
+          </a>
+          <!-- YouTube -->
+          <a href="#" class="social-link" aria-label="YouTube">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon fill="#000" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
       </div>
       <div class="footer-col">
         <h4 data-i18n="foot-col1">Services</h4>
@@ -1259,14 +1293,82 @@
   #chat-widget { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem; }
 
   #chat-toggle-btn {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--blue); border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 24px rgba(42,181,245,0.5), 0 2px 8px rgba(0,0,0,0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
-    color: #000; flex-shrink: 0;
+    width: 72px; height: 44px;
+    background: none; border: none; cursor: pointer;
+    position: relative; flex-shrink: 0;
+    transition: transform 0.2s, filter 0.2s;
+    filter: drop-shadow(0 4px 14px rgba(42,181,245,0.55));
   }
-  #chat-toggle-btn:hover { transform: scale(1.08); box-shadow: 0 6px 32px rgba(42,181,245,0.6); }
+  #chat-toggle-btn:hover { transform: scale(1.1) translateY(-2px); filter: drop-shadow(0 6px 20px rgba(42,181,245,0.75)); }
+
+  /* ── CSS Car ── */
+  .car-body {
+    position: absolute; bottom: 6px; left: 0; right: 0;
+    height: 20px; background: var(--blue); border-radius: 4px 4px 3px 3px;
+  }
+  .car-roof {
+    position: absolute; bottom: 24px; left: 14px; right: 14px;
+    height: 16px; background: var(--blue);
+    border-radius: 8px 8px 0 0;
+  }
+  .car-windshield-front {
+    position: absolute; bottom: 24px; right: 12px;
+    width: 14px; height: 15px;
+    background: rgba(7,9,13,0.7);
+    clip-path: polygon(0 100%, 100% 100%, 85% 0%, 15% 0%);
+  }
+  .car-windshield-back {
+    position: absolute; bottom: 24px; left: 12px;
+    width: 14px; height: 15px;
+    background: rgba(7,9,13,0.7);
+    clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0 100%);
+  }
+  .car-wheel-l {
+    position: absolute; bottom: 0; left: 10px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #0b0f18;
+    border: 3px solid #888;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+  }
+  .car-wheel-r {
+    position: absolute; bottom: 0; right: 10px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #0b0f18;
+    border: 3px solid #888;
+    box-shadow: 0 0 6px rgba(0,0,0,0.6);
+  }
+  .car-headlight {
+    position: absolute; bottom: 12px; right: 2px;
+    width: 7px; height: 5px;
+    background: #fff8c0;
+    border-radius: 2px;
+    box-shadow: 0 0 6px 2px rgba(255,248,150,0.7);
+  }
+  .car-taillight {
+    position: absolute; bottom: 12px; left: 2px;
+    width: 6px; height: 4px;
+    background: #ff4444;
+    border-radius: 1px;
+    box-shadow: 0 0 5px 1px rgba(255,60,60,0.6);
+  }
+  /* close X shown when chat is open */
+  .car-close-x {
+    position: absolute; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    color: #000; font-size: 1.1rem; font-weight: 900;
+    background: var(--blue); border-radius: 50%;
+    width: 44px; height: 44px;
+    margin: auto;
+  }
+  #chat-toggle-btn.is-open .car-body,
+  #chat-toggle-btn.is-open .car-roof,
+  #chat-toggle-btn.is-open .car-windshield-front,
+  #chat-toggle-btn.is-open .car-windshield-back,
+  #chat-toggle-btn.is-open .car-wheel-l,
+  #chat-toggle-btn.is-open .car-wheel-r,
+  #chat-toggle-btn.is-open .car-headlight,
+  #chat-toggle-btn.is-open .car-taillight { display: none; }
+  #chat-toggle-btn.is-open .car-close-x { display: flex; }
 
   #chat-window {
     width: 340px;
@@ -1364,7 +1466,7 @@
 <div id="chat-widget">
   <div id="chat-window" class="chat-hidden">
     <div id="chat-header">
-      <div class="chat-avatar">SG</div>
+      <div class="chat-avatar">🚗</div>
       <div>
         <div class="chat-hdr-name">The Shine Guys</div>
         <div class="chat-hdr-status" id="chat-status-lbl">Online</div>
@@ -1381,8 +1483,15 @@
     </div>
   </div>
   <button id="chat-toggle-btn" aria-label="Chat with us">
-    <svg id="chat-ico-open" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-    <svg id="chat-ico-close" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    <div class="car-body"></div>
+    <div class="car-roof"></div>
+    <div class="car-windshield-front"></div>
+    <div class="car-windshield-back"></div>
+    <div class="car-wheel-l"></div>
+    <div class="car-wheel-r"></div>
+    <div class="car-headlight"></div>
+    <div class="car-taillight"></div>
+    <div class="car-close-x">✕</div>
   </button>
 </div>
 
@@ -1438,8 +1547,6 @@
   const togBtn  = document.getElementById('chat-toggle-btn');
   const closeBtn= document.getElementById('chat-close-btn');
   const qrDiv   = document.getElementById('chat-qr');
-  const icoOpen = document.getElementById('chat-ico-open');
-  const icoClose= document.getElementById('chat-ico-close');
   const statusEl= document.getElementById('chat-status-lbl');
   let open = false, greeted = false;
 
@@ -1485,7 +1592,7 @@
   function openChat() {
     open = true;
     win.classList.remove('chat-hidden');
-    icoOpen.style.display = 'none'; icoClose.style.display = '';
+    togBtn.classList.add('is-open');
     const r = R[lang()];
     statusEl.textContent = r.status;
     inp.placeholder = r.ph;
@@ -1499,7 +1606,7 @@
   function closeChat() {
     open = false;
     win.classList.add('chat-hidden');
-    icoOpen.style.display = ''; icoClose.style.display = 'none';
+    togBtn.classList.remove('is-open');
   }
 
   togBtn.addEventListener('click', () => open ? closeChat() : openChat());

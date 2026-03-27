@@ -1,0 +1,4 @@
+.netlify/
+temporary screenshots/
+*.mp4
+node_modules/
